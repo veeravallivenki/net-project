@@ -47,22 +47,22 @@ jobs:
           command: 'publish'
           publishWebProjects: true
 
-    job: WaitingApproval
-    dependsOn: Build
-    pool: server
-    timeoutInMinutes: 1000
-    steps:
-    - task: ManualValidation@0
-      inputs:
-        notifyUsers: 'veeravallikrishna293@gmail.com'
-        instructions: 'please check sonar dashboard and approve'
+      job: WaitingApproval
+      dependsOn: Build
+      pool: server
+      timeoutInMinutes: 1000
+      steps:
+      - task: ManualValidation@0
+        inputs:
+          notifyUsers: 'veeravallikrishna293@gmail.com'
+          instructions: 'please check sonar dashboard and approve'
 
-    job: Deploy
-    dependsOn: WaitingApproval
-    steps:
-    - task: AzureWebApp@1
-      inputs:
-        appType: 'webApp'
-        appName: 'dotnet app'
-        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-        deploymentMethod: 'auto'
+      job: Deploy
+      dependsOn: WaitingApproval
+      steps:
+      - task: AzureWebApp@1
+        inputs:
+          appType: 'webApp'
+          appName: 'dotnet app'
+          package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+          deploymentMethod: 'auto'
