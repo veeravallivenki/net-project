@@ -15,7 +15,6 @@ variables:
   buildConfiguration: 'Release'
 
 jobs:
-
     job: Build
     steps:
     - task: NuGetToolInstaller@1
@@ -30,7 +29,6 @@ jobs:
         scannerMode: 'MSBuild'
         projectKey: 'net_project_net_project_AYoc5jkdMA-xZg_Cxn8v'
         
-
     - task: VSBuild@1
       inputs:
         solution: '$(solution)'
